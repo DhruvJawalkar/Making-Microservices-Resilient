@@ -7,6 +7,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class FallbackController {
 
+    //fallback endpoint in case of downstream service failure/ unavailability
     @RequestMapping("/contactSupport")
     public Mono<String> contactSupport() {
         return Mono.just("An error occurred. Please try after some time or contact support team!!!");
