@@ -26,6 +26,7 @@ public class CustomersServiceImpl implements ICustomersService {
     private CustomerRepository customerRepository;
 
     private LoansFeignClient loansFeignClient;
+    private CardsFeignClient cardsFeignClient;
 
     /**
      * @param mobileNumber - Input Mobile Number
@@ -49,6 +50,10 @@ public class CustomersServiceImpl implements ICustomersService {
             customerDetailsDto.setLoansDto(loansDtoResponseEntity.getBody());
         }
 
+        ResponseEntity<CardsDto> cardsDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
+        if(null != cardsDtoResponseEntity) {
+            customerDetailsDto.setCardsDto(cardsDtoResponseEntity.getBody());
+        }
 
         return customerDetailsDto;
 
